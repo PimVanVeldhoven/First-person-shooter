@@ -26,12 +26,12 @@ public class shooting : MonoBehaviour
             {
                 if (hit.collider.tag.Equals("NPC")) 
                 {
-                    Debug.Log("cube killer");
+                    Debug.Log("You killed something :O");
                     Destroy(hit.collider.gameObject);
                 }
                 else
                 {
-                    Debug.Log("how did you miss");
+                    Debug.Log("how did you miss that ");
                 }
             }
         }

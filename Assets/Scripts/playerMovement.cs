@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+using JetBrains.Annotations;
 
 public class playerMovement : MonoBehaviour
 {
@@ -16,6 +19,8 @@ public class playerMovement : MonoBehaviour
     private float moveX;
     private float moveZ;
     private Vector3 move;
+    public int hp = 1;
+    
 
 
     public CharacterController characterController;
@@ -27,6 +32,7 @@ public class playerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         currentSpeed = walkingSpeed;
         baseLineGravity = gravity;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
@@ -61,5 +67,28 @@ public class playerMovement : MonoBehaviour
         {
             gravity -= 2*Time.deltaTime;
         }
+        
+      
+    }
+    private void OnTriggerEnter(Collider collison)
+    {
+        if (hp > 0)
+        {
+            if (collison.gameObject.CompareTag("NPC"))
+            {
+                hp--;
+            }
+            else
+            {
+
+            }
+        }
+        else if (hp <= 0)
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            SceneManager.LoadScene("GameOver");
+        }
+        
+
     }
 }
